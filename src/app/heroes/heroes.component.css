@@ -21,7 +21,7 @@
     left: .1em;
   }
   .heroes li.selected {
-    background-color: black;
+    background-color: darkgreen;
     color: white;
   }
   .heroes li.selected:hover {

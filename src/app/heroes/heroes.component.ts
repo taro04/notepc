@@ -1,47 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../hero';
-//import { HEROES } from '../mock-heroes';
-import { HeroService } from "../hero.service"
+import { Hero } from "../hero";
+import { HeroService } from "../hero.service";
+import { MessageService } from "../message.service"
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css']
 })
-
 export class HeroesComponent implements OnInit {
 
-  constructor(private heroService: HeroService) { }
-
-  heroes:Hero[] = []; //空ヒーロー配列の定義
-//  hero :Hero = {id:1,name:'Wind'}
+  constructor(private heroService: HeroService,
+      private messageService: MessageService) { }
+  //hero="windstorm-man!!";
+  //hero : Hero = { id:1, name:"windstorm-man" }
+  //heroes = HEROES;
   
+  heroes:Hero[]=[]
   ngOnInit(): void {
-    this.getHeroes();
+    this.getHeroes()
   }
 
-  selectedHero?: Hero;
+//  selectedHero?: Hero
+//  onSelect(hero:Hero): void {
+//    this.selectedHero=hero;
+//    this.messageService.add(`Hero component selected hero id=${hero.id}`)
+//  }
 
-  onSelect (hero: Hero): void{
-      this.selectedHero=hero;
-  }
-
-  getHeroes(): void {
-  //  this.heroes = this.heroService.getHeroes();  
-  this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes)
+  getHeroes():void{
+    this.heroService.getHeroes()
+        .subscribe(heroes => this.heroes = heroes);
   }
 
 }
-
-/* htmlの残り
-<!-
-<h3>{{hero.name | uppercase}} Details</h3>
-<div><span>id: </span>{{hero.id}}</div>
-<div><span>name: </span>{{hero.name}}</div>
-
-<div>
-    <label for="name">Hero name : </label>
-    <input id="name" [(ngModel)]="hero.name" placeholder="name">
-</div>
-->
-*/
